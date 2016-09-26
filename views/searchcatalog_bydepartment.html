@@ -1,0 +1,96 @@
+{% extends "backend.html" %}
+{% block title %}Search Catalog by Department{% endblock %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block location %}<li class="active">Search Catalog by department</li>{% endblock %}
+{% block content %}
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Search Catalog by Department</h3>
+        <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        <div class="row">
+            <form  method="post">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Select Department</label>
+                        <select class="form-control select2" name="department_code" style="width: 100%;">
+                            <option disabled selected></option>
+                            {% for d in department %}
+                            {% if d.DEPT_CODE == department_selected%}
+                            <option value="{{d.DEPT_CODE}}" selected="selected">{{d.DEPT_NAME}}</option>
+                            {% endif %}
+                            {% if d.DEPT_CODE != department_selected%}
+                            <option value="{{d.DEPT_CODE}}">{{d.DEPT_NAME}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                        </div>
+                        <div class="form-group">
+                        <input type="submit" value="Search Catalog" name="searchCatalog" class="btn btn-lg btn-primary" style="width: 100%;">
+                    </div><!-- /.form-group -->
+                    {% if  message %}
+                    {% if not error %}
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Success!</strong> {{message}}
+                    </div>
+                        <div class="col-md-8">
+                        </div>
+                    {% endif %}
+
+                    {% if error %}
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Warning!</strong> {{message}}
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                        <br><br><br>
+                        {% if course %}
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Course Search Result</h3>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <table id="table" class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>CRN</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Credits</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for c in course %}
+                                    <tr>
+                                        <td>{{c.CRS_CODE}}</td>
+                                        <td>{{c.CRS_TITLE}}</td>
+                                        <td>{{c.CRS_DESCRIPTION}}</td>
+                                        <td>{{c.CRS_CREDIT}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>CRN</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Credits</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+                        {% endif %}
+                </div><!-- /.col -->
+            </form>
+        </div><!-- /.row -->
+    </div><!-- /.box-body -->
+</div><!-- /.box -->
+{% endblock %}

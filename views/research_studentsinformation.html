@@ -1,0 +1,114 @@
+{% extends "backend.html" %}
+{% block title %}Research Students information{% endblock %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block location %}<li class="active">Research Students information</li>{% endblock %}
+{% block content %}
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Students Search Result</h3>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        <table id="table" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>STU ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>email </th>
+                <th>GPA</th>
+                <th>Total Credits</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for s in student %}
+            <tr>
+                <td>{{s.STU_ID}}</td>
+                <td>{{s.LNAME}}, {{s.FNAME}}</td>
+                <td>{{s.PHONE}}</td>
+                <td>{{s.EMAIL}}</td>
+                {% if s.STU_GPA %}
+                <td>{{s.STU_GPA}}</td>
+                {% else %}
+                <td><i>N/A</i></td>
+                {% endif %}
+                <td>{{s.TOTAL_CREDITS}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>STU ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>email </th>
+                <th>GPA</th>
+                <th>Total Credits</th>
+            </tr>
+            </tfoot>
+        </table>
+        <hr>
+        <div class="col-md-6">
+            <h3>Hold list</h3>
+            <table id="table2" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>email </th>
+                    <th>Hold Type</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for h in hold %}
+                <tr>
+                    <td>{{h.LNAME}}, {{h.FNAME}}</td>
+                    <td>{{h.PHONE}}</td>
+                    <td>{{h.EMAIL}}</td>
+                    <td>{{h.HOLD_TYPE}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>email </th>
+                    <th>Hold Type</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div><!--end col-md-6 -->
+
+         <div class="col-xs-1"></div>
+
+        <div class="col-md-6">
+            <h3>Adviser list</h3>
+            <table id="table3" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Adviser</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for a in adviser %}
+                <tr>
+                    <td>{{a.STU_LNAME}}, {{a.STU_FNAME}}</td>
+                    <td>{{a.LNAME}}, {{a.FNAME}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Adviser</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div><!--end col-md-6 -->
+    </div><!-- /.box-body -->
+
+</div><!-- /.box -->
+{% endblock %}

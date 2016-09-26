@@ -1,0 +1,36 @@
+{% extends "backend.html" %}
+{% block title %}View Holds{% endblock %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block location %}<li class="active">View Holds</li>{% endblock %}
+{% block content %}
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">View Holds</h3>
+        <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        <div class="row">
+            {% if  message %}
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>NO HOLDS!</strong> {{message}}
+            </div>
+            {% endif %}
+
+            {% if hold %}
+            {% for h in hold %}
+            <div class="alert alert-warning">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>HOlD TYPE: </strong> {{h.HOLD_TYPE}}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+        </div><!-- /.row -->
+    </div><!-- /.box-body -->
+</div><!-- /.box -->
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "backend.html" %}
+{% block title %}View Adviser{% endblock %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block location %}<li class="active"> View Adviser </li>{% endblock %}
+{% block content %}
+<div class="box box-default">
+    <div class="box-header with-border">
+        <div class="col-md-6">
+            {% if adviser %}
+            <h3>Adviser(s) :</h3>
+            {% for a in adviser %}
+            <strong>Name : </strong> {{a.FNAME}} {{a.LNAME}}<br>
+            <strong>Phone :</strong> {{a.PHONE}}<br>
+            <strong>email :</strong><a href="mailto:"{{a.EMAIL}}> {{a.EMAIL}}</a><br>
+            <hr>
+            {% endfor %}
+            {% else %}
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>You do not have any advisers assigned to you , please contact advisment for further details</strong> {{message}}
+            </div>
+            {% endif %}
+
+
+        </div><!--end col-md.-6-->
+      </div> <!-- /.box-header -->
+    </div><!-- /.box -->
+
+{% endblock %}

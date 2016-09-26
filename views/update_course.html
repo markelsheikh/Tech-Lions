@@ -1,0 +1,73 @@
+{% extends "backend.html" %}
+{% block title %}Update Course{% endblock %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block location %}<li class="active">Update Course</li>{% endblock %}
+{% block content %}
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Update Course</h3>
+        <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        <div class="row">
+            <form  method="post">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Select Course</label>
+                        <select class="form-control select2" name="course_name" style="width: 100%;" onchange="this.form.submit()">
+                            <option disabled selected></option>
+                            {% for c in course %}
+                            {% if c.CRS_TITLE == course_selected.CRS_TITLE%}
+                            <option value="{{c.CRS_TITLE}}" selected="selected">{{c.CRS_TITLE}}</option>
+                            {% endif %}
+                            {% if c.CRS_TITLE != course_selected.CRS_TITLE%}
+                            <option value="{{c.CRS_TITLE}}">{{c.CRS_TITLE}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="hidden" value="{{course_selected.CRS_TITLE}}" name="selected_name">
+                    <input type="hidden" value="{{state}}" name="state">
+                    <div class="form-group">
+                    <label>Course Name</label>
+                    <input class="form-control" type="text" style="width: 100%;" name="new_course_name" value="{{course_selected.CRS_TITLE}}">
+                    </div><!-- /.form-group -->
+                    <div class="form-group">
+                        <label>Course Description</label>
+                        <input class="form-control" type="text" style="width: 100%;" name="course_description" value="{{course_selected.CRS_DESCRIPTION}}">
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        <label>Course Credits</label>
+                        <input class="form-control" type="number" min="1" max="4" style="width: 100%;" name="course_credit" value="{{course_selected.CRS_CREDIT}}">
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        <input type="submit" value="Update Course" name="updatecourse" class="btn btn-lg btn-primary" style="width: 100%;">
+                    </div><!-- /.form-group -->
+                    {% if  message %}
+                    {% if not error %}
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Success!</strong> {{message}}
+                    </div>
+                    {% endif %}
+
+                    {% if error %}
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Warning!</strong> {{message}}
+                    </div>
+                    {% endif %}
+                    {% endif %}
+
+                </div><!-- /.col -->
+            </form>
+        </div><!-- /.row -->
+    </div><!-- /.box-body -->
+</div><!-- /.box -->
+{% endblock %}

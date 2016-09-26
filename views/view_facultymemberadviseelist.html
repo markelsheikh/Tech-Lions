@@ -1,0 +1,61 @@
+{% extends "backend.html" %}
+{% block title %}View Faculty Advisee List{% endblock %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block location %}<li class="active">View Faculty Advisee List</li>{% endblock %}
+{% block content %}
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">View Faculty Advisee List</h3>
+        <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div><!-- /.box-header -->
+    {% if student %}
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Advisee List</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+            <table id="table" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for s in student %}
+                <tr>
+                    <td>{{s.ID}}</td>
+                    <td>{{s.FNAME}}</td>
+                    <td>{{s.LNAME}}</td>
+                    <td>{{s.EMAIL}}</td>
+                    <td>{{s.PHONE}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>Student ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+    {% else %}
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>{{message}}</strong>
+    </div>
+    {% endif %}
+</div><!-- /.col -->
+{% endblock %}

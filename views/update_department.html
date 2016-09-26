@@ -1,0 +1,69 @@
+{% extends "backend.html" %}
+{% block title %}Create Department{% endblock %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block location %}<li class="active">Update Department</li>{% endblock %}
+{% block content %}
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Update Department</h3>
+        <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        <div class="row">
+            <form  method="post">
+                <div class="col-md-12">
+
+                    <div class="form-group">
+                        <label>Department Name</label>
+                        <select class="form-control select2" name="department_code" style="width: 100%;" onchange="this.form.submit()">
+                            <option disabled selected></option>
+                            {% for d in department %}
+                            {% if d.DEPT_CODE == department_selected %}
+                            <option value="{{d.DEPT_CODE}}" selected="selected">{{d.DEPT_NAME}}</option>
+                            {% endif %}
+                            {% if d.DEPT_CODE != department_selected %}
+                            <option value="{{d.DEPT_CODE}}">{{d.DEPT_NAME}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        <label>Faculty Name</label>
+                        <select class="form-control select2" name="faculty_code" style="width: 100%;">
+                            <option disabled selected></option>
+                            {% for f in faculty %}
+                            <option value="{{f.ID}}">{{f.FNAME}} {{f.LNAME}}</option>
+                            {% endfor %}
+                        </select>
+                    </div><!-- /.form-groupj -->
+
+                    <div class="form-group">
+                        <input type="submit" name="update_department" value="Update Department" class="btn btn-lg btn-primary" style="width: 100%;">
+                    </div><!-- /.form-group -->
+                    {% if  message %}
+                    {% if not error %}
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Success!</strong> {{message}}
+                    </div>
+                    {% endif %}
+
+                    {% if error %}
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Warning!</strong> {{message}}
+                    </div>
+                    {% endif %}
+                    {% endif %}
+
+                </div><!-- /.col -->
+            </form>
+        </div><!-- /.row -->
+    </div><!-- /.box-body -->
+</div><!-- /.box -->
+{% endblock %}

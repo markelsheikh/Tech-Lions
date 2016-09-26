@@ -1,0 +1,57 @@
+{% extends "backend.html" %}
+{% block title %}View Student information{% endblock %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block location %}<li class="active">View Student Information</li>{% endblock %}
+{% block content %}
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">View Student Information :</h3>
+        <div class="box box-primary">
+            <div class="box-body box-profile">
+                <img class="profile-user-img img-responsive img-circle" src="images/{{user.PERSON_TYPE}}.png" alt="User profile picture">
+                <h3 class="profile-username text-center">{{user.FNAME}}  {{user.LNAME}}</h3>
+                <p class="text-muted text-center"></p>
+                <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                        <b>Address :</b> <a class="pull-right">{{user.ADDRESS}}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>City :</b> <a class="pull-right">{{user.CITY}}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>State :</b> <a class="pull-right">{{user.STATE}}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Zip Code :</b> <a class="pull-right">{{user.ZIP}}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Phone :</b> <a class="pull-right">{{user.PHONE}}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>email :</b> <a class="pull-right">{{user.EMAIL}}</a>
+                    </li>
+                    {% if user.PERSON_TYPE == 'STUDENT' %}
+                    <li class="list-group-item">
+                        <b>GPA :</b> <a class="pull-right">{{user.STU_GPA}}</a>
+                    </li>
+
+                    <li class="list-group-item">
+                        <b>Minor :</b> <a class="pull-right">{{user.MINOR}}</a>
+                    </li>
+                    {% for major in user.MAJOR %}
+                    <li class="list-group-item">
+                        <b>MAJOR :</b> <a class="pull-right">{{major.MAJOR_NAME}}</a>
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+                {% if user.PERSON_TYPE == 'STUDENT' %}
+                <a href="/view_studentdetailschedule" class="btn btn-primary btn-block"><b>View Schedule</b></a>
+                {% endif %}
+            </div><!-- /.body-box-profile -->
+        </div><!--/.box-primary-->
+    </div><!-- /.box-header -->
+</div><!-- /.box -->
+{% endblock %}

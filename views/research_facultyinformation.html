@@ -1,0 +1,130 @@
+{% extends "backend.html" %}
+{% block title %}Research Faculty information{% endblock %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block location %}<li class="active">Research Faculty information</li>{% endblock %}
+{% block content %}
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Students Search Result</h3>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        <table id="table" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>email </th>
+                <th>Address</th>
+                <th>State</th>
+                <th>Zip Code</th>
+                <th>Credits Taught</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for f in faculty %}
+            <tr>
+                <td>{{f.FAC_ID}}</td>
+                <td>{{f.LNAME}}, {{f.FNAME}}</td>
+                <td>{{f.PHONE}}</td>
+                <td>{{f.EMAIL}}</td>
+                <td>{{f.ADDRESS}}</td>
+                <td>{{f.STATE}}</td>
+                <td>{{f.ZIP}}</td>
+                <td>{{f.CREDITS_TAUGHT}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>email </th>
+                <th>Address</th>
+                <th>State</th>
+                <th>Zip Code</th>
+                <th>Credits Taught</th>
+            </tr>
+            </tfoot>
+        </table>
+        <hr>
+        <div class="col-md-6">
+            <h3>Department list</h3>
+            <table id="table2" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>FAC ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Dept Code</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for d in department %}
+                <tr>
+                    {% if d.FAC_ID %}
+                    <td>{{d.FAC_ID}}</td>
+                    {% else %}
+                    <td><i>N/A</i></td>
+                    {% endif %}
+                    {% if d.LNAME %}
+                    <td>{{d.LNAME}}, {{d.FNAME}}</td>
+                    {% else %}
+                    <td><i>Not Assigned</i></td>
+                    {% endif %}
+                    <td>{{d.DEPT_NAME}}</td>
+                    <td>{{d.DEPT_CODE}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>FAC ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Dept Code</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div><!--end col-md-6 -->
+
+        <div class="col-xs-1"></div>
+
+        <div class="col-md-6">
+            <h3>Class list</h3>
+            <table id="table3" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Faculty Name</th>
+                    <th>Course Title</th>
+                    <th>Term</th>
+                    <th>Crs Credits</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for c in class %}
+                <tr>
+                    <td>{{c.LNAME}}, {{c.FNAME}}</td>
+                    <td>{{c.CRS_TITLE}}</td>
+                    <td>{{c.TERM_TITLE}}</td>
+                    <td>{{c.CRS_CREDIT}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>Faculty Name</th>
+                    <th>Course Title</th>
+                    <th>Term</th>
+                    <th>CRS Credits</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div><!--end col-md-6 -->
+    </div><!-- /.box-body -->
+
+</div><!-- /.box -->
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "backend.html" %}
+{% block title %}View grades by Transcript{% endblock %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block location %}<li class="active">View grades by Transcript</li>{% endblock %}
+{% block content %}
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">view grades by Transcript</h3>
+        <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+            </div><!-- /.box-header -->
+                 {% if grades %}
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Grades by Transcripts</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="table" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Course Title</th>
+                                    <th>Midterm Grade</th>
+                                    <th>Final Grade</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for r in grades %}
+                                <tr>
+                                    <td>{{r.CRS_TITLE}}</td>
+                                    {% if r.MID_TERM_GRADE %}
+                                    <td>{{r.MID_TERM_GRADE}}</td>
+                                    {% else %}
+                                    <td><i>N/A</i></td>
+                                    {% endif %}
+                                    {% if r.ENROLL_GRADE %}
+                                    <td>{{r.ENROLL_GRADE}}</td>
+                                    {% else %}
+                                    <td><i>N/A</i></td>
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Course Title</th>
+                                    <th>Midterm Grade</th>
+                                    <th>Final Grade</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+                    {% endif %}
+                </div><!-- /.col -->
+
+{% endblock %}

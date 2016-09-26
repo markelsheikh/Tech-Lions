@@ -1,0 +1,76 @@
+{% extends "backend.html" %}
+{% block title %}Assign Midterm Grades{% endblock %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block location %}<li class="active">Assign Midterm Grades</li>{% endblock %}
+{% block content %}
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Assign Midterm Grades</h3>
+        <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        <div class="row">
+            <form  method="post">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Select Course</label>
+                        <select class="form-control select2" name="course_code" style="width: 100%;" onchange="this.form.submit()">
+                            <option disabled selected></option>
+                            {% for c in course %}
+                            {% if c.CRS_CODE == course_selected and c.CLASS_SECTION == class_selected%}
+                            <option value="{{c.CRS_CODE}},{{c.CLASS_SECTION}}" selected="selected">{{c.CRS_TITLE}}</option>
+                            {% else %}
+                            <option value="{{c.CRS_CODE}},{{c.CLASS_SECTION}}">{{c.CRS_TITLE}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        <label>Select Student</label>
+                        <select class="form-control select2" name="student_id" style="width: 100%;">
+                            <option disabled selected></option>
+                            {% for s in student %}
+                            <option value="{{s.ID}}">{{s.FNAME}} {{s.LNAME}}, Current Grade: {% if s.MID_TERM_GRADE %} {{s.MID_TERM_GRADE}} {% else %}N/A{%endif%}</option>
+                            {% endfor %}
+                        </select>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        <label>Select Grade</label>
+                        <select class="form-control select2" name="grade" style="width: 100%;">
+                            <option disabled selected></option>
+                            <option value="S">S (Satisfactory)</option>
+                            <option value="U">U (Unsatisfactory)</option>
+                        </select>
+                    </div><!-- /.form-groupj -->
+
+                    <div class="form-group">
+                        <input type="submit" name="assign_midtermsgrades" value="Assign Midterm Grade" class="btn btn-lg btn-primary" style="width: 100%;">
+                    </div><!-- /.form-group -->
+                    {% if  message %}
+                    {% if not error %}
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Success!</strong> {{message}}
+                    </div>
+                    {% endif %}
+
+                    {% if error %}
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Warning!</strong> {{message}}
+                    </div>
+                    {% endif %}
+                    {% endif %}
+
+                </div><!-- /.col -->
+            </form>
+        </div><!-- /.row -->
+    </div><!-- /.box-body -->
+</div><!-- /.box -->
+{% endblock %}
